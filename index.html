@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P&P Profinish | Wykończenia wnętrz i usługi budowlane</title>
+    <meta
+      name="description"
+      content="P&P Profinish – kompleksowe wykończenia wnętrz, odbudowa domów, hydraulika i elektryka. Skontaktuj się i wyceń realizację."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-glow bg-glow--left" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--right" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#start" class="brand" aria-label="P&P Profinish">
+          <span class="brand__tag">P&P</span>
+          <span class="brand__name">Profinish</span>
+        </a>
+        <nav class="site-nav" aria-label="Główna nawigacja">
+          <a href="#oferta">Oferta</a>
+          <a href="#o-nas">O nas</a>
+          <a href="#realizacje">Realizacje</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="start">
+      <section class="hero container reveal">
+        <div class="hero__text">
+          <p class="kicker">Wykończenia wnętrz i prace budowlane</p>
+          <h1>Nowoczesne realizacje od projektu do odbioru.</h1>
+          <p class="lead">
+            Tworzymy estetyczne i solidne wnętrza. Podejmujemy się także szerszych
+            prac budowlanych – od odbudowy domów po hydraulikę i elektrykę.
+          </p>
+          <div class="hero__cta">
+            <a href="#kontakt" class="btn btn--primary">Umów rozmowę</a>
+            <a href="#oferta" class="btn btn--ghost">Zobacz ofertę</a>
+          </div>
+        </div>
+
+        <form class="contact-card" id="kontakt-form" action="#" method="post">
+          <h2>Krótka wycena</h2>
+          <p>Opisz potrzeby, a oddzwonimy z propozycją.</p>
+
+          <label>
+            Imię i nazwisko
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+
+          <label>
+            Telefon
+            <input type="tel" name="phone" autocomplete="tel" required />
+          </label>
+
+          <label>
+            E-mail
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+
+          <label>
+            Zakres prac
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+
+          <button type="submit" class="btn btn--primary btn--full">Wyślij zapytanie</button>
+          <p class="form-note" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="oferta" class="container section reveal">
+        <div class="section__head">
+          <p class="kicker">Oferta</p>
+          <h2>Kompleksowo, czysto i terminowo.</h2>
+        </div>
+        <div class="grid grid--3">
+          <article class="card">
+            <h3>Wykończenia wnętrz</h3>
+            <p>
+              Gładzie, malowanie, sufity, podłogi, łazienki i kuchnie – od stanu
+              deweloperskiego do gotowego wnętrza.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Odbudowa i remonty domów</h3>
+            <p>
+              Modernizacje, poprawki konstrukcyjne, odświeżanie i pełne remonty
+              starszych nieruchomości.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Hydraulika i elektryka</h3>
+            <p>
+              Instalacje wodno-kanalizacyjne oraz elektryczne, montaż osprzętu i
+              bezpieczne uruchomienie.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="o-nas" class="container section reveal">
+        <div class="section__head">
+          <p class="kicker">O firmie</p>
+          <h2>P&P Profinish – partner do zadań specjalnych.</h2>
+        </div>
+        <div class="split">
+          <p>
+            Działamy praktycznie we wszystkich obszarach wykończeń i prac
+            budowlanych. Dzięki temu nie musisz koordynować kilku ekip – bierzesz
+            jednego wykonawcę, który dowozi temat od A do Z.
+          </p>
+          <ul class="check-list">
+            <li>Jasny harmonogram i stały kontakt</li>
+            <li>Materiały dobierane pod budżet i efekt</li>
+            <li>Estetyka wykonania i dbałość o detale</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="realizacje" class="container section reveal">
+        <div class="section__head">
+          <p class="kicker">Jak pracujemy</p>
+          <h2>Prosty proces, pełna przejrzystość.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline__item">
+            <span>01</span>
+            <h3>Konsultacja</h3>
+            <p>Rozpoznanie potrzeb, pomiary i zakres prac.</p>
+          </article>
+          <article class="timeline__item">
+            <span>02</span>
+            <h3>Wycena i plan</h3>
+            <p>Przedstawiamy kosztorys i harmonogram realizacji.</p>
+          </article>
+          <article class="timeline__item">
+            <span>03</span>
+            <h3>Realizacja</h3>
+            <p>Prace wykonujemy etapami, z kontrolą jakości.</p>
+          </article>
+          <article class="timeline__item">
+            <span>04</span>
+            <h3>Odbiór</h3>
+            <p>Finalne poprawki i przekazanie gotowej inwestycji.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="kontakt" class="container section reveal">
+        <div class="contact-strip">
+          <div>
+            <p class="kicker">Kontakt</p>
+            <h2>Masz projekt? Zadzwoń lub napisz.</h2>
+          </div>
+          <div class="contact-strip__data">
+            <a href="tel:+48123456789">+48 123 456 789</a>
+            <a href="mailto:biuro@profinish.pl">biuro@profinish.pl</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© <span id="year"></span> P&P Profinish. Wszelkie prawa zastrzeżone.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
