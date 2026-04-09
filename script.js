@@ -43,7 +43,7 @@ if (form) {
 
     if (submitButton) {
       submitButton.disabled = true;
-      submitButton.textContent = "Wysylanie...";
+      submitButton.textContent = "Wysyłanie...";
     }
 
     try {
@@ -58,17 +58,17 @@ if (form) {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || "Nie udalo sie wyslac formularza.");
+        throw new Error(result.error || "Nie udało się wysłać formularza.");
       }
 
-      showToast("Wiadomosc zostala wyslana. Dziekujemy za kontakt.");
+      showToast("Wiadomość została wysłana. Dziękujemy za kontakt.");
       form.reset();
     } catch (error) {
-      showToast(error.message || "Wystapil problem przy wysylce formularza.");
+      showToast(error.message || "Wystąpił problem przy wysyłce formularza.");
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
-        submitButton.textContent = "Wyslij zapytanie";
+        submitButton.textContent = "Wyślij zapytanie";
       }
     }
   });

@@ -74,7 +74,7 @@ class ContactServer(BaseHTTPRequestHandler):
 
         if not name or not email or not message:
             self._send_json(
-                {"error": "Uzupelnij imie, e-mail i opis zakresu prac."},
+                {"error": "Uzupełnij imię, e-mail i opis zakresu prac."},
                 HTTPStatus.BAD_REQUEST,
             )
             return
@@ -83,8 +83,8 @@ class ContactServer(BaseHTTPRequestHandler):
             self._send_json(
                 {
                     "error": (
-                        "Brakuje konfiguracji SMTP. Ustaw zmienna srodowiskowa "
-                        "SMTP_PASSWORD z haslem aplikacji Gmail."
+                        "Brakuje konfiguracji SMTP. Ustaw zmienną środowiskową "
+                        "SMTP_PASSWORD z hasłem aplikacji Gmail."
                     )
                 },
                 HTTPStatus.INTERNAL_SERVER_ERROR,
@@ -95,7 +95,7 @@ class ContactServer(BaseHTTPRequestHandler):
             self._send_contact_email(name, phone, email, message)
         except smtplib.SMTPException:
             self._send_json(
-                {"error": "Nie udalo sie wyslac e-maila. Sprawdz konfiguracje Gmail SMTP."},
+                {"error": "Nie udało się wysłać e-maila. Sprawdź konfigurację Gmail SMTP."},
                 HTTPStatus.BAD_GATEWAY,
             )
             return
@@ -112,6 +112,11 @@ class ContactServer(BaseHTTPRequestHandler):
             return
 
         content_type, _ = mimetypes.guess_type(target.name)
+        if content_type:
+            if content_type.startswith("text/"):
+                content_type = f"{content_type}; charset=utf-8"
+            elif content_type in {"application/javascript", "application/json"}:
+                content_type = f"{content_type}; charset=utf-8"
         self.send_response(HTTPStatus.OK)
         self.send_header("Content-Type", content_type or "application/octet-stream")
         self.end_headers()
@@ -138,7 +143,7 @@ class ContactServer(BaseHTTPRequestHandler):
                 [
                     "Nowe zapytanie ze strony P&P Profinish",
                     "",
-                    f"Imie i nazwisko: {name}",
+                    f"Imię i nazwisko: {name}",
                     f"Telefon: {phone_line}",
                     f"E-mail: {email}",
                     "",
