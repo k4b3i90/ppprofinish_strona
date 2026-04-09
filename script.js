@@ -1,29 +1,75 @@
-const yearEl = document.querySelector('#year');
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
+const revealElements = document.querySelectorAll(".reveal");
+const form = document.querySelector(".contact-form");
+const toast = document.querySelector(".toast");
+const submitButton = form?.querySelector('button[type="submit"]');
+
+const showToast = (message) => {
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("is-visible");
+
+  window.clearTimeout(showToast.timeoutId);
+  showToast.timeoutId = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+  }, 3200);
+};
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+
+  revealElements.forEach((element) => observer.observe(element));
+} else {
+  revealElements.forEach((element) => element.classList.add("is-visible"));
 }
 
-const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-revealEls.forEach((el) => observer.observe(el));
-
-const contactForm = document.querySelector('#kontakt-form');
-const formStatus = document.querySelector('#form-status');
-
-if (contactForm && formStatus) {
-  contactForm.addEventListener('submit', (event) => {
+if (form) {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    formStatus.textContent = 'Dziękujemy! Wiadomość została przygotowana do wysyłki.';
-    contactForm.reset();
+
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Wysylanie...";
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Nie udalo sie wyslac formularza.");
+      }
+
+      showToast("Wiadomosc zostala wyslana. Dziekujemy za kontakt.");
+      form.reset();
+    } catch (error) {
+      showToast(error.message || "Wystapil problem przy wysylce formularza.");
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Wyslij zapytanie";
+      }
+    }
   });
 }

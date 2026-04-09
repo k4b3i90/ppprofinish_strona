@@ -3,180 +3,337 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>P&P Profinish | Wykończenia wnętrz i usługi budowlane</title>
+    <title>P&amp;P Profinish | Wykonczenia i Inwestycje</title>
     <meta
       name="description"
-      content="P&P Profinish – kompleksowe wykończenia wnętrz, odbudowa domów, hydraulika i elektryka. Skontaktuj się i wyceń realizację."
+      content="P&amp;P Profinish - wykonczenia wnetrz, hydraulika, wykopy liniowe i szeroki zakres prac inwestycyjnych."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="bg-glow bg-glow--left" aria-hidden="true"></div>
-    <div class="bg-glow bg-glow--right" aria-hidden="true"></div>
-
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <a href="#start" class="brand" aria-label="P&P Profinish">
-          <span class="brand__tag">P&P</span>
-          <span class="brand__name">Profinish</span>
+    <div class="site-backdrop" aria-hidden="true">
+      <div class="backdrop-glow"></div>
+      <div class="backdrop-grid"></div>
+      <div class="backdrop-paper">
+        <span class="paper-roll"></span>
+        <span class="paper-lines"></span>
+      </div>
+      <div class="backdrop-tools">
+        <span class="tool-ruler"></span>
+        <span class="tool-pencil"></span>
+        <span class="tool-compass"></span>
+      </div>
+    </div>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#start" aria-label="P&amp;P Profinish">
+          <span class="brand-mark">P<span>&amp;</span>P</span>
+          <span class="brand-text">Profinish</span>
         </a>
-        <nav class="site-nav" aria-label="Główna nawigacja">
+
+        <nav class="site-nav" aria-label="Nawigacja glowna">
           <a href="#oferta">Oferta</a>
+          <a href="#galeria">Galeria</a>
           <a href="#o-nas">O nas</a>
-          <a href="#realizacje">Realizacje</a>
+          <a href="#realizacja">Jak pracujemy</a>
           <a href="#kontakt">Kontakt</a>
         </nav>
-      </div>
-    </header>
+      </header>
 
-    <main id="start">
-      <section class="hero container reveal">
-        <div class="hero__text">
-          <p class="kicker">Wykończenia wnętrz i prace budowlane</p>
-          <h1>Nowoczesne realizacje od projektu do odbioru.</h1>
-          <p class="lead">
-            Tworzymy estetyczne i solidne wnętrza. Podejmujemy się także szerszych
-            prac budowlanych – od odbudowy domów po hydraulikę i elektrykę.
-          </p>
-          <div class="hero__cta">
-            <a href="#kontakt" class="btn btn--primary">Umów rozmowę</a>
-            <a href="#oferta" class="btn btn--ghost">Zobacz ofertę</a>
-          </div>
-        </div>
-
-        <form class="contact-card" id="kontakt-form" action="#" method="post">
-          <h2>Krótka wycena</h2>
-          <p>Opisz potrzeby, a oddzwonimy z propozycją.</p>
-
-          <label>
-            Imię i nazwisko
-            <input type="text" name="name" autocomplete="name" required />
-          </label>
-
-          <label>
-            Telefon
-            <input type="tel" name="phone" autocomplete="tel" required />
-          </label>
-
-          <label>
-            E-mail
-            <input type="email" name="email" autocomplete="email" required />
-          </label>
-
-          <label>
-            Zakres prac
-            <textarea name="message" rows="4" required></textarea>
-          </label>
-
-          <button type="submit" class="btn btn--primary btn--full">Wyślij zapytanie</button>
-          <p class="form-note" id="form-status" role="status" aria-live="polite"></p>
-        </form>
-      </section>
-
-      <section id="oferta" class="container section reveal">
-        <div class="section__head">
-          <p class="kicker">Oferta</p>
-          <h2>Kompleksowo, czysto i terminowo.</h2>
-        </div>
-        <div class="grid grid--3">
-          <article class="card">
-            <h3>Wykończenia wnętrz</h3>
-            <p>
-              Gładzie, malowanie, sufity, podłogi, łazienki i kuchnie – od stanu
-              deweloperskiego do gotowego wnętrza.
+      <main id="start">
+        <section class="hero section">
+          <div class="hero-copy reveal">
+            <h1>
+              Szeroki zakres prac,
+              <span>dopracowany efekt koncowy.</span>
+            </h1>
+            <p class="hero-text">
+              P&amp;P Profinish realizuje wykonczenia wnetrz oraz wybrane prace
+              inwestycyjne: hydraulike, elektryke, wykopy liniowe, roboty
+              ziemne, wznoszenie budynkow, zadania specjalistyczne dopasowane
+              do konkretnej budowy i inwestycji.
             </p>
-          </article>
-          <article class="card">
-            <h3>Odbudowa i remonty domów</h3>
-            <p>
-              Modernizacje, poprawki konstrukcyjne, odświeżanie i pełne remonty
-              starszych nieruchomości.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Hydraulika i elektryka</h3>
-            <p>
-              Instalacje wodno-kanalizacyjne oraz elektryczne, montaż osprzętu i
-              bezpieczne uruchomienie.
-            </p>
-          </article>
-        </div>
-      </section>
 
-      <section id="o-nas" class="container section reveal">
-        <div class="section__head">
-          <p class="kicker">O firmie</p>
-          <h2>P&P Profinish – partner do zadań specjalnych.</h2>
-        </div>
-        <div class="split">
-          <p>
-            Działamy praktycznie we wszystkich obszarach wykończeń i prac
-            budowlanych. Dzięki temu nie musisz koordynować kilku ekip – bierzesz
-            jednego wykonawcę, który dowozi temat od A do Z.
-          </p>
-          <ul class="check-list">
-            <li>Jasny harmonogram i stały kontakt</li>
-            <li>Materiały dobierane pod budżet i efekt</li>
-            <li>Estetyka wykonania i dbałość o detale</li>
-          </ul>
-        </div>
-      </section>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#kontakt">Zapytaj o wycene</a>
+              <a class="button button-secondary" href="#oferta">Zobacz zakres</a>
+            </div>
 
-      <section id="realizacje" class="container section reveal">
-        <div class="section__head">
-          <p class="kicker">Jak pracujemy</p>
-          <h2>Prosty proces, pełna przejrzystość.</h2>
-        </div>
-        <div class="timeline">
-          <article class="timeline__item">
-            <span>01</span>
-            <h3>Konsultacja</h3>
-            <p>Rozpoznanie potrzeb, pomiary i zakres prac.</p>
-          </article>
-          <article class="timeline__item">
-            <span>02</span>
-            <h3>Wycena i plan</h3>
-            <p>Przedstawiamy kosztorys i harmonogram realizacji.</p>
-          </article>
-          <article class="timeline__item">
-            <span>03</span>
-            <h3>Realizacja</h3>
-            <p>Prace wykonujemy etapami, z kontrolą jakości.</p>
-          </article>
-          <article class="timeline__item">
-            <span>04</span>
-            <h3>Odbiór</h3>
-            <p>Finalne poprawki i przekazanie gotowej inwestycji.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="kontakt" class="container section reveal">
-        <div class="contact-strip">
-          <div>
-            <p class="kicker">Kontakt</p>
-            <h2>Masz projekt? Zadzwoń lub napisz.</h2>
+            <ul class="hero-metrics" aria-label="Najwazniejsze atuty">
+              <li>
+                <strong>Kompleksowo</strong>
+                <span>od wykonczen po prace techniczne</span>
+              </li>
+              <li>
+                <strong>Terminowo</strong>
+                <span>z naciskiem na organizacje i porzadek</span>
+              </li>
+              <li>
+                <strong>Profesjonalnie</strong>
+                <span>sprawdzony zespol i elastyczny zakres</span>
+              </li>
+            </ul>
           </div>
-          <div class="contact-strip__data">
-            <a href="tel:+48123456789">+48 123 456 789</a>
-            <a href="mailto:biuro@profinish.pl">biuro@profinish.pl</a>
+        </section>
+
+        <section class="section" id="zakres">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Zakres dzialan</p>
+            <h2>Realizujemy szeroki zakres prac budowlanych i wykonczeniowych</h2>
+            <p>
+              Dzialamy elastycznie, dlatego mozemy wejsc w inwestycje jako
+              glowny wykonawca konkretnego etapu albo przejac wybrane zakresy
+              prac technicznych i budowlanych.
+            </p>
           </div>
-        </div>
-      </section>
-    </main>
 
-    <footer class="site-footer">
-      <div class="container footer-wrap">
-        <p>© <span id="year"></span> P&P Profinish. Wszelkie prawa zastrzeżone.</p>
-      </div>
-    </footer>
+          <div class="service-stack service-stack-grid reveal reveal-delay">
+            <article>
+              <span>01</span>
+              <h2>Wykonczenia</h2>
+              <p>Sciany, sufity, zabudowy, montaz i estetyczne wykonczenie wnetrz.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h2>Hydraulika</h2>
+              <p>Instalacje i prace pomocnicze realizowane na etapie inwestycji.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h2>Elektryka</h2>
+              <p>Prace elektryczne wykonywane jako osobny zakres lub element calej realizacji.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <h2>Roboty ziemne</h2>
+              <p>Wykopy, przygotowanie terenu oraz wsparcie prac terenowych na budowie.</p>
+            </article>
+            <article>
+              <span>05</span>
+              <h2>Wznoszenie budynkow</h2>
+              <p>Wsparcie prac konstrukcyjnych i realizacji od etapu budowy do dalszych robot.</p>
+            </article>
+            <article>
+              <span>06</span>
+              <h2>Inne prace robotowo-budowlane</h2>
+              <p>Szeroki zakres zadan dopasowanych do potrzeb inwestycji i biezacej organizacji prac.</p>
+            </article>
+          </div>
+        </section>
 
-    <script src="script.js"></script>
+        <section class="section" id="oferta">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Oferta</p>
+            <h2>Elastyczny zespol do zadan wykonczeniowych i inwestycyjnych</h2>
+            <p>
+              Dzialamy tam, gdzie liczy sie dokladnosc, sprawna organizacja i
+              gotowosc do wejscia w rozne etapy prac.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <article class="card reveal">
+              <h3>Wykonczenia wnetrz</h3>
+              <p>
+                Realizacje mieszkan, domow, lokali i przestrzeni uzytkowych z
+                naciskiem na estetyke i detale.
+              </p>
+            </article>
+            <article class="card reveal reveal-delay">
+              <h3>Hydraulika i instalacje</h3>
+              <p>
+                Zakres prac dopasowany do inwestycji: od przygotowania po
+                wsparcie ekip branzowych.
+              </p>
+            </article>
+            <article class="card reveal reveal-delay-2">
+              <h3>Elektryka</h3>
+              <p>
+                Realizacja prac elektrycznych jako oddzielny zakres lub czesc
+                wiekszej inwestycji.
+              </p>
+            </article>
+            <article class="card reveal">
+              <h3>Prace terenowe</h3>
+              <p>
+                Roboty pomocnicze, wykopy i zadania specjalne zalezne od potrzeb
+                konkretnej realizacji.
+              </p>
+            </article>
+            <article class="card reveal reveal-delay">
+              <h3>Wsparcie inwestycji</h3>
+              <p>
+                Dobrze odnajdujemy sie w szerszym zakresie dzialan, gdy projekt
+                wymaga kilku kompetencji w jednym miejscu.
+              </p>
+            </article>
+            <article class="card reveal reveal-delay-2 accent-card">
+              <h3>Zakres do ustalenia</h3>
+              <p>
+                Jesli inwestycja nie miesci sie w klasycznym schemacie, warto
+                porozmawiac. Pracujemy elastycznie i konkretnie.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="galeria">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Galeria</p>
+            <h2>Miejsce na realizacje i zdjecia z inwestycji</h2>
+            <p>
+              Ta sekcja jest przygotowana pod uzupelnienie o prawdziwe zdjecia z
+              wykonanych prac. Na razie zostawiamy elegancki placeholder pod
+              dalsze materialy.
+            </p>
+          </div>
+
+          <div class="services-grid gallery-grid">
+            <article class="card reveal gallery-card">
+              <img src="./gallery/realizacja-01.png" alt="Nowoczesna strefa prysznicowa z ciemnym kamieniem" />
+              <h3>Strefa prysznicowa premium</h3>
+              <p>Kontrastowe plyty, oswietlenie liniowe i armatura w cieplym odcieniu metalu.</p>
+            </article>
+            <article class="card reveal reveal-delay gallery-card">
+              <img src="./gallery/realizacja-02.png" alt="Wneka prysznicowa z zabudowanymi polkami" />
+              <h3>Zabudowana wneka lazienkowa</h3>
+              <p>Precyzyjne wykonczenie detali i funkcjonalne polki przygotowane pod codzienne uzytkowanie.</p>
+            </article>
+            <article class="card reveal reveal-delay-2 gallery-card">
+              <img src="./gallery/realizacja-03.png" alt="Jasne wnetrze mieszkania w trakcie wykonczenia" />
+              <h3>Wnetrze na etapie finalizacji</h3>
+              <p>Czyste linie, przygotowane powierzchnie i baza pod dalsze wykonczenie calego mieszkania.</p>
+            </article>
+            <article class="card reveal gallery-card">
+              <img src="./gallery/realizacja-04.png" alt="Nowoczesna lazienka z minimalistycznym prysznicem" />
+              <h3>Minimalistyczna lazienka</h3>
+              <p>Nowoczesna strefa kapielowa z oswietleniem liniowym i dopracowanym detalem montazowym.</p>
+            </article>
+            <article class="card reveal reveal-delay gallery-card">
+              <img src="./gallery/realizacja-05.png" alt="Posadzka z efektem marmuru w nowoczesnym wnetrzu" />
+              <h3>Posadzka i przejscie stref</h3>
+              <p>Eleganckie zestawienie materialow i staranne wykonczenie laczenia stref komunikacyjnych.</p>
+            </article>
+            <article class="card reveal reveal-delay-2 gallery-card">
+              <img src="./gallery/realizacja-06-final.jpg" alt="Wykop pod siec PPOZ i wodociag na placu budowy" />
+              <h3>Siec PPOZ i wodociag</h3>
+              <p>Prowadzenie instalacji w wykopie z zachowaniem ciaglosci prac i przygotowaniem pod kolejne etapy inwestycji.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section about-section" id="o-nas">
+          <div class="about-copy reveal">
+            <p class="eyebrow">O nas</p>
+            <h2>Profesjonalny zespol, ktory rozumie budowe od praktycznej strony</h2>
+            <p>
+              Stawiamy na jakosc wykonania, odpowiedzialnosc za termin i kulture
+              pracy na inwestycji. Dzieki szerokiemu zakresowi uslug mozemy
+              sprawnie przejsc od jednego etapu do kolejnego bez zbednych
+              przestojow.
+            </p>
+          </div>
+
+          <div class="about-panel card chrome-card reveal reveal-delay">
+            <div>
+              <p class="card-label">Dlaczego my</p>
+              <ul class="feature-list">
+                <li>Sprawna koordynacja i przejrzysta komunikacja</li>
+                <li>Minimalistyczne podejscie: konkrety, nie obietnice</li>
+                <li>Szeroki zakres uslug w jednym zespole</li>
+                <li>Gotowosc do pracy przy roznych typach inwestycji</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section process-section" id="realizacja">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Jak pracujemy</p>
+            <h2>Prosty proces, jasne ustalenia, kontrola nad wykonaniem</h2>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item reveal">
+              <span>01</span>
+              <h3>Rozmowa o inwestycji</h3>
+              <p>Ustalamy zakres, miejsce realizacji i priorytety prac.</p>
+            </article>
+            <article class="timeline-item reveal reveal-delay">
+              <span>02</span>
+              <h3>Dobor rozwiazania</h3>
+              <p>Proponujemy sposob dzialania dopasowany do etapu budowy.</p>
+            </article>
+            <article class="timeline-item reveal reveal-delay-2">
+              <span>03</span>
+              <h3>Realizacja</h3>
+              <p>Wchodzimy na budowe z zespolem przygotowanym do konkretnego zakresu.</p>
+            </article>
+            <article class="timeline-item reveal">
+              <span>04</span>
+              <h3>Efekt i dalsze etapy</h3>
+              <p>Zamykamy prace lub przechodzimy plynnie do kolejnych zadan.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section contact-section" id="kontakt">
+          <div class="contact-copy reveal">
+            <p class="eyebrow">Kontakt</p>
+            <h2>Opisz inwestycje, a przygotujemy punkt wyjscia do rozmowy</h2>
+            <p>
+              Formularz moze wysylac wiadomosci bezposrednio na firmowy adres
+              e-mail. Konfiguracje Gmaila podpinamy po stronie serwera.
+            </p>
+
+            <div class="contact-details">
+              <a href="tel:+48797595552">797-595-552</a>
+              <a href="tel:+48539885606">539-885-606</a>
+              <a href="mailto:p.p.profinish@gmail.com">p.p.profinish@gmail.com</a>
+              <a href="https://www.instagram.com/p_p_profinish/" target="_blank" rel="noreferrer">
+                Instagram: @p_p_profinish
+              </a>
+              <p>Obszar dzialania: realizacje lokalne i inwestycje ustalane indywidualnie</p>
+            </div>
+          </div>
+
+          <form class="contact-form card chrome-card reveal reveal-delay">
+            <label>
+              Imie i nazwisko
+              <input type="text" name="name" placeholder="Np. Jan Kowalski" required />
+            </label>
+            <label>
+              Numer telefonu
+              <input type="tel" name="phone" placeholder="Np. +48 500 000 000" />
+            </label>
+            <label>
+              E-mail
+              <input type="email" name="email" placeholder="Np. biuro@firma.pl" required />
+            </label>
+            <label>
+              Zakres prac
+              <textarea
+                name="message"
+                rows="5"
+                placeholder="Opisz krotko, czego dotyczy inwestycja i jaki zakres prac Cie interesuje."
+                required
+              ></textarea>
+            </label>
+            <button type="submit" class="button button-primary">Wyslij zapytanie</button>
+            <p class="form-note">Wiadomosc zostanie wyslana bezposrednio na p.p.profinish@gmail.com.</p>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="./script.js"></script>
   </body>
 </html>
