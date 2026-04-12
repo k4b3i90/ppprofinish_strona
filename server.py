@@ -6,6 +6,7 @@ from email.message import EmailMessage
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 
 ROOT = Path(__file__).resolve().parent
@@ -38,11 +39,14 @@ CONTACT_TO = os.getenv("CONTACT_TO", "p.p.profinish@gmail.com")
 
 class ContactServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/":
+        parsed_url = urlparse(self.path)
+        request_path = unquote(parsed_url.path)
+
+        if request_path == "/":
             self._serve_file("index.html")
             return
 
-        safe_path = self.path.lstrip("/")
+        safe_path = request_path.lstrip("/")
         if not safe_path:
             safe_path = "index.html"
 
@@ -54,7 +58,9 @@ class ContactServer(BaseHTTPRequestHandler):
         self._send_json({"error": "Nie znaleziono zasobu."}, HTTPStatus.NOT_FOUND)
 
     def do_POST(self):
-        if self.path != "/api/contact":
+        request_path = urlparse(self.path).path
+
+        if request_path != "/api/contact":
             self._send_json({"error": "Nieprawidlowy endpoint."}, HTTPStatus.NOT_FOUND)
             return
 
