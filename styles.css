@@ -478,6 +478,12 @@ h1 span {
   gap: 18px;
 }
 
+.keyword-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
 .card {
   min-height: 100%;
   padding: 24px;
@@ -647,6 +653,7 @@ h1 span {
 @media (max-width: 1080px) {
   .hero,
   .service-stack-grid,
+  .keyword-grid,
   .about-section,
   .contact-section,
   .timeline,
@@ -690,6 +697,7 @@ h1 span {
   .site-header,
   .hero,
   .service-stack-grid,
+  .keyword-grid,
   .about-section,
   .contact-section,
   .timeline,

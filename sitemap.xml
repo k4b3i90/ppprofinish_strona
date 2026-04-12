@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url>
     <loc>https://www.ppprofinish.pl/</loc>
     <lastmod>2026-04-12</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.ppprofinish.pl/gallery/realizacja-01.png</image:loc>
+      <image:title>Strefa prysznicowa premium</image:title>
+      <image:caption>Nowoczesne wykończenie łazienki, płytki, oświetlenie liniowe i armatura.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ppprofinish.pl/gallery/realizacja-02.png</image:loc>
+      <image:title>Zabudowana wnęka łazienkowa</image:title>
+      <image:caption>Remont łazienki, zabudowa wnęki prysznicowej i precyzyjne wykończenie detali.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ppprofinish.pl/gallery/realizacja-03.png</image:loc>
+      <image:title>Wnętrze na etapie finalizacji</image:title>
+      <image:caption>Wykończenia wnętrz, przygotowanie powierzchni i prace remontowe.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ppprofinish.pl/gallery/realizacja-04.png</image:loc>
+      <image:title>Minimalistyczna łazienka</image:title>
+      <image:caption>Nowoczesna łazienka, strefa prysznicowa, montaż i wykończenie.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ppprofinish.pl/gallery/realizacja-05.png</image:loc>
+      <image:title>Posadzka i przejście stref</image:title>
+      <image:caption>Układanie płytek, posadzka i staranne łączenie materiałów.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ppprofinish.pl/gallery/realizacja-06-final.jpg</image:loc>
+      <image:title>Sieć PPOŻ i wodociąg</image:title>
+      <image:caption>Wykopy liniowe, roboty ziemne, sieć PPOŻ i wodociąg na placu budowy.</image:caption>
+    </image:image>
   </url>
 </urlset>
