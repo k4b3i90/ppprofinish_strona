@@ -115,11 +115,13 @@ class ContactServer(BaseHTTPRequestHandler):
         except urllib.error.HTTPError as error:
             error_body = error.read().decode("utf-8", errors="replace")
             print(f"Resend API failed: {error.code} {error_body}", flush=True)
+            resend_message = self._extract_resend_error_message(error_body)
             self._send_json(
                 {
                     "error": (
-                        "Resend odrzucił wysyłkę. Sprawdź RESEND_API_KEY i "
-                        "RESEND_FROM w Railway."
+                        f"Resend odrzucił wysyłkę: {resend_message}"
+                        if resend_message
+                        else "Resend odrzucił wysyłkę. Sprawdź RESEND_API_KEY i RESEND_FROM w Railway."
                     )
                 },
                 HTTPStatus.BAD_GATEWAY,
@@ -181,6 +183,24 @@ class ContactServer(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
+
+    def _extract_resend_error_message(self, error_body: str):
+        try:
+            payload = json.loads(error_body)
+        except json.JSONDecodeError:
+            return ""
+
+        message = payload.get("message")
+        if isinstance(message, str):
+            return message
+
+        error = payload.get("error")
+        if isinstance(error, str):
+            return error
+        if isinstance(error, dict) and isinstance(error.get("message"), str):
+            return error["message"]
+
+        return ""
 
     def _send_contact_email(self, name: str, phone: str, email: str, message: str):
         if RESEND_API_KEY:
