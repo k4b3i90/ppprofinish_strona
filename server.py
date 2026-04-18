@@ -30,8 +30,8 @@ def load_env_file():
 
 load_env_file()
 
-SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
-SMTP_PORT = int(os.getenv("SMTP_PORT", "465"))
+SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com").strip()
+SMTP_PORT = int(os.getenv("SMTP_PORT", "465").strip())
 SMTP_USERNAME = os.getenv("SMTP_USERNAME", "p.p.profinish@gmail.com").strip()
 # Google shows app passwords in groups of four. Railway may receive the spaces,
 # so normalize all whitespace before logging in to Gmail SMTP.
@@ -181,7 +181,16 @@ class ContactServer(BaseHTTPRequestHandler):
             )
         )
 
-        with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, timeout=20) as server:
+        if SMTP_PORT == 465:
+            with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, timeout=20) as server:
+                server.login(SMTP_USERNAME, SMTP_PASSWORD)
+                server.send_message(mail)
+            return
+
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=20) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
             server.login(SMTP_USERNAME, SMTP_PASSWORD)
             server.send_message(mail)
 
