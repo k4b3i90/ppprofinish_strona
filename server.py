@@ -41,6 +41,8 @@ class ContactServer(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed_url = urlparse(self.path)
         request_path = unquote(parsed_url.path)
+        if request_path != "/" and request_path.endswith("/"):
+            request_path = request_path.rstrip("/")
 
         if request_path == "/":
             self._serve_file("index.html")
@@ -53,6 +55,11 @@ class ContactServer(BaseHTTPRequestHandler):
         target = ROOT / safe_path
         if target.is_file() and ROOT in target.resolve().parents:
             self._serve_file(safe_path)
+            return
+
+        html_target = ROOT / f"{safe_path}.html"
+        if html_target.is_file() and ROOT in html_target.resolve().parents:
+            self._serve_file(f"{safe_path}.html")
             return
 
         self._send_json({"error": "Nie znaleziono zasobu."}, HTTPStatus.NOT_FOUND)
