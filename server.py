@@ -2,6 +2,8 @@ import json
 import mimetypes
 import os
 import smtplib
+import urllib.error
+import urllib.request
 from email.message import EmailMessage
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -37,6 +39,8 @@ SMTP_USERNAME = os.getenv("SMTP_USERNAME", "p.p.profinish@gmail.com").strip()
 # so normalize all whitespace before logging in to Gmail SMTP.
 SMTP_PASSWORD = "".join(os.getenv("SMTP_PASSWORD", "").split())
 CONTACT_TO = os.getenv("CONTACT_TO", "p.p.profinish@gmail.com").strip()
+RESEND_API_KEY = os.getenv("RESEND_API_KEY", "").strip()
+RESEND_FROM = os.getenv("RESEND_FROM", "P&P Profinish <onboarding@resend.dev>").strip()
 
 
 class ContactServer(BaseHTTPRequestHandler):
@@ -94,12 +98,12 @@ class ContactServer(BaseHTTPRequestHandler):
             )
             return
 
-        if not SMTP_PASSWORD:
+        if not SMTP_PASSWORD and not RESEND_API_KEY:
             self._send_json(
                 {
                     "error": (
-                        "Brakuje konfiguracji SMTP. Ustaw zmienną środowiskową "
-                        "SMTP_PASSWORD z hasłem aplikacji Gmail."
+                        "Brakuje konfiguracji wysyłki. Ustaw RESEND_API_KEY albo "
+                        "SMTP_PASSWORD w Railway."
                     )
                 },
                 HTTPStatus.INTERNAL_SERVER_ERROR,
@@ -108,6 +112,26 @@ class ContactServer(BaseHTTPRequestHandler):
 
         try:
             self._send_contact_email(name, phone, email, message)
+        except urllib.error.HTTPError as error:
+            error_body = error.read().decode("utf-8", errors="replace")
+            print(f"Resend API failed: {error.code} {error_body}", flush=True)
+            self._send_json(
+                {
+                    "error": (
+                        "Resend odrzucił wysyłkę. Sprawdź RESEND_API_KEY i "
+                        "RESEND_FROM w Railway."
+                    )
+                },
+                HTTPStatus.BAD_GATEWAY,
+            )
+            return
+        except urllib.error.URLError as error:
+            print(f"Resend connection failed: {error}", flush=True)
+            self._send_json(
+                {"error": "Nie udało się połączyć z Resend API. Spróbuj ponownie za chwilę."},
+                HTTPStatus.BAD_GATEWAY,
+            )
+            return
         except smtplib.SMTPAuthenticationError as error:
             print(f"SMTP authentication failed: {error.smtp_code} {error.smtp_error!r}", flush=True)
             self._send_json(
@@ -159,27 +183,56 @@ class ContactServer(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def _send_contact_email(self, name: str, phone: str, email: str, message: str):
+        if RESEND_API_KEY:
+            self._send_contact_email_resend(name, phone, email, message)
+            return
+
+        self._send_contact_email_smtp(name, phone, email, message)
+
+    def _build_contact_text(self, name: str, phone: str, email: str, message: str):
+        phone_line = phone if phone else "Nie podano"
+        return "\n".join(
+            [
+                "Nowe zapytanie ze strony P&P Profinish",
+                "",
+                f"Imię i nazwisko: {name}",
+                f"Telefon: {phone_line}",
+                f"E-mail: {email}",
+                "",
+                "Zakres prac:",
+                message,
+            ]
+        )
+
+    def _send_contact_email_resend(self, name: str, phone: str, email: str, message: str):
+        payload = {
+            "from": RESEND_FROM,
+            "to": [CONTACT_TO],
+            "subject": f"Nowe zapytanie ze strony P&P Profinish od {name}",
+            "text": self._build_contact_text(name, phone, email, message),
+            "reply_to": email,
+        }
+        request = urllib.request.Request(
+            "https://api.resend.com/emails",
+            data=json.dumps(payload).encode("utf-8"),
+            method="POST",
+            headers={
+                "Authorization": f"Bearer {RESEND_API_KEY}",
+                "Content-Type": "application/json",
+            },
+        )
+
+        with urllib.request.urlopen(request, timeout=20) as response:
+            response.read()
+
+    def _send_contact_email_smtp(self, name: str, phone: str, email: str, message: str):
         mail = EmailMessage()
         mail["Subject"] = f"Nowe zapytanie ze strony P&P Profinish od {name}"
         mail["From"] = SMTP_USERNAME
         mail["To"] = CONTACT_TO
         mail["Reply-To"] = email
 
-        phone_line = phone if phone else "Nie podano"
-        mail.set_content(
-            "\n".join(
-                [
-                    "Nowe zapytanie ze strony P&P Profinish",
-                    "",
-                    f"Imię i nazwisko: {name}",
-                    f"Telefon: {phone_line}",
-                    f"E-mail: {email}",
-                    "",
-                    "Zakres prac:",
-                    message,
-                ]
-            )
-        )
+        mail.set_content(self._build_contact_text(name, phone, email, message))
 
         if SMTP_PORT == 465:
             with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, timeout=20) as server:
