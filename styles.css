@@ -220,13 +220,13 @@ textarea {
 
 .brand-logo-mark {
   display: inline-flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  width: 86px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   overflow: hidden;
   border: 1px solid var(--line-strong);
-  border-radius: 999px;
+  border-radius: 50%;
   background:
     radial-gradient(circle at 35% 20%, rgba(255, 255, 255, 0.14), transparent 34%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04)),
@@ -238,10 +238,9 @@ textarea {
 
 .brand-logo-mark img {
   display: block;
-  width: 96px;
-  height: 96px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
-  transform: translateY(-5px);
   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.32));
 }
 
@@ -603,13 +602,28 @@ h1 span {
 }
 
 .contact-details {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-top: 28px;
 }
 
+.contact-links {
+  display: grid;
+  gap: 12px;
+}
+
 .contact-details a {
   font-size: 1.05rem;
+}
+
+.contact-logo {
+  width: clamp(120px, 18vw, 190px);
+  height: auto;
+  flex: 0 0 auto;
+  opacity: 0.92;
+  filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.28));
 }
 
 .contact-form {
@@ -776,6 +790,15 @@ h1 span {
 
   .site-backdrop {
     background-position: 62% center;
+  }
+
+  .contact-details {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .contact-logo {
+    width: min(150px, 46vw);
   }
 }
 
