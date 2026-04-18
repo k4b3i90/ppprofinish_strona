@@ -116,12 +116,15 @@ class ContactServer(BaseHTTPRequestHandler):
             error_body = error.read().decode("utf-8", errors="replace")
             print(f"Resend API failed: {error.code} {error_body}", flush=True)
             resend_message = self._extract_resend_error_message(error_body)
+            visible_error = resend_message or error_body.strip()
+            if len(visible_error) > 260:
+                visible_error = f"{visible_error[:260]}..."
             self._send_json(
                 {
                     "error": (
-                        f"Resend odrzucił wysyłkę: {resend_message}"
-                        if resend_message
-                        else "Resend odrzucił wysyłkę. Sprawdź RESEND_API_KEY i RESEND_FROM w Railway."
+                        f"Resend odrzucił wysyłkę ({error.code}): {visible_error}"
+                        if visible_error
+                        else f"Resend odrzucił wysyłkę ({error.code}). Sprawdź RESEND_API_KEY i RESEND_FROM w Railway."
                     )
                 },
                 HTTPStatus.BAD_GATEWAY,
