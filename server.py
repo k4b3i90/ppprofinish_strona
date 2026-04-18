@@ -242,6 +242,7 @@ class ContactServer(BaseHTTPRequestHandler):
             headers={
                 "Authorization": f"Bearer {RESEND_API_KEY}",
                 "Content-Type": "application/json",
+                "User-Agent": "ppprofinish-website/1.0",
             },
         )
 
