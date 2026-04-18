@@ -32,9 +32,11 @@ load_env_file()
 
 SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", "465"))
-SMTP_USERNAME = os.getenv("SMTP_USERNAME", "p.p.profinish@gmail.com")
-SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
-CONTACT_TO = os.getenv("CONTACT_TO", "p.p.profinish@gmail.com")
+SMTP_USERNAME = os.getenv("SMTP_USERNAME", "p.p.profinish@gmail.com").strip()
+# Google shows app passwords in groups of four. Railway may receive the spaces,
+# so normalize all whitespace before logging in to Gmail SMTP.
+SMTP_PASSWORD = "".join(os.getenv("SMTP_PASSWORD", "").split())
+CONTACT_TO = os.getenv("CONTACT_TO", "p.p.profinish@gmail.com").strip()
 
 
 class ContactServer(BaseHTTPRequestHandler):
@@ -106,9 +108,22 @@ class ContactServer(BaseHTTPRequestHandler):
 
         try:
             self._send_contact_email(name, phone, email, message)
-        except smtplib.SMTPException:
+        except smtplib.SMTPAuthenticationError as error:
+            print(f"SMTP authentication failed: {error.smtp_code} {error.smtp_error!r}", flush=True)
             self._send_json(
-                {"error": "Nie udało się wysłać e-maila. Sprawdź konfigurację Gmail SMTP."},
+                {
+                    "error": (
+                        "Gmail odrzucił logowanie SMTP. Sprawdź, czy SMTP_USERNAME "
+                        "to dokładnie konto, na którym wygenerowano hasło aplikacji."
+                    )
+                },
+                HTTPStatus.BAD_GATEWAY,
+            )
+            return
+        except (smtplib.SMTPException, OSError) as error:
+            print(f"SMTP send failed: {type(error).__name__}: {error}", flush=True)
+            self._send_json(
+                {"error": "Nie udało się połączyć z Gmail SMTP. Sprawdź zmienne SMTP w Railway."},
                 HTTPStatus.BAD_GATEWAY,
             )
             return
